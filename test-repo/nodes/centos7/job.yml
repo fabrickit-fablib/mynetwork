@@ -1,0 +1,31 @@
+job:
+  pipelines:
+    - name: bootstrap
+      runs:
+        - delete container1
+        - create container1
+        - if status == 0:
+          - sh echo success bootstrap
+        - else:
+          - sh echo failed bootstrap
+    - name: setup
+      runs:
+        - setup
+    - name: clean
+      runs:
+        - delete container1
+
+container1:
+  provider: libvirt
+  libvirt:
+    gateway: 192.168.122.1
+    netmask: 255.255.255.0
+  libvirt_vms:
+    - name: mynetwork-centos7-1
+      ip: 192.168.122.101
+      template: user-data_centos7
+      src_image: http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1511.qcow2c.xz
+      vcpus: 1
+      ram: 2048
+      disk_size: 40
+      disk_size: 40

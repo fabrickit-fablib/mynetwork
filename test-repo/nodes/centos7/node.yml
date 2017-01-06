@@ -1,0 +1,6 @@
+node_map:
+  mynetwork:
+    hosts:
+      - 192.168.122.101
+    fabruns:
+      - mynetwork/mynetwork
